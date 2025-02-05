@@ -9,8 +9,8 @@
       <hr/>
       <% if project.activities.any? %>
         <ul>
-          <% project.activities.each do |activity| %>
-            <li><%= "#{activity.user.email} #{activity.comment? ? "commented" : "changed status" } on #{activity.created_at}" %></li>
+          <% project.activities.order(created_at: :desc).each do |activity| %>
+            <li><%= "#{activity.user.email} #{activity.comment? ? "commented" : "changed status" } on #{activity.created_at.strftime('%b %d, %Y %H:%M %p')}" %></li>
           <% end %>
         </ul>
       <% else %>
