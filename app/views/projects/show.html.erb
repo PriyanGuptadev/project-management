@@ -27,5 +27,5 @@
 </div>
 
 <div id="project_comments">
-  <%= render @project.comments %>
+  <%= render @project.comments.includes(:user) %>
 </div>
