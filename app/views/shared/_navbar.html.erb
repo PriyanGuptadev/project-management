@@ -1,0 +1,23 @@
+<nav class="bg-gray-800 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <a href="/" class="flex items-center text-xl font-semibold text-white">
+          Project Management
+        </a>
+        <div class="hidden md:flex space-x-4 ml-10">
+          <%= link_to "Home", root_path, class: "px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700" %>
+        </div>
+      </div>
+
+      <div class="md:flex items-center space-x-4">
+        <% if user_signed_in? %>
+            <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "block px-4 py-2 hover:bg-gray-200" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

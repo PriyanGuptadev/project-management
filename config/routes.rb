@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :projects do
+    patch "update_status", on: :member, as: :update_status
+
+    resources :comments, only: [ :create ], defaults: { commentable_type: "Project" }
+  end
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,5 +17,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "projects#index"
 end
