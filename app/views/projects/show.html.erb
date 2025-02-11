@@ -16,16 +16,12 @@
   </div>
 </div>
 
-<div id="project_activities">
-  <%= render 'activities', project: @project %>
-</div>
-
 <h2 class="text-lg font-semibold">Comments</h2>
 
 <div id="new_project_comment">
-  <%= render "comments/form", commentable: @project %>
+  <%= render "conversation_histories/form", project: @project %>
 </div>
 
-<div id="project_comments">
-  <%= render @project.comments.includes(:user) %>
+<div id="conversation_history">
+  <%= render 'conversation_histories', project: @project %>
 </div>

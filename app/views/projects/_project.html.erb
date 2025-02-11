@@ -9,9 +9,9 @@
   </p>
   <p class="my-5">
   <label for="project-status-#{project.id}" class="text-gray-700 font-medium">Status:</label>
-  <%= form_with model: project, url: update_status_project_path(id: project.id), method: :patch, data: { turbo_frame: "project_#{project.id}"}, class: "inline-block ml-2" do |form| %>
-    <%= form.select :status, Project.statuses.keys, {}, class: "border rounded px-2 py-1 text-gray-700", onchange: "this.form.submit();" %>
-   <% end %> 
+  <%= form_with model: project, url: update_status_project_path(id: project.id), method: :patch, data: { turbo: true }, class: "inline-block ml-2" do |form| %>
+    <%= form.select :status, Project.statuses.keys, {}, class: "border rounded px-2 py-1 text-gray-700", onchange: "this.form.requestSubmit();" %>
+  <% end %> 
   </p>
   <p class="my-5">
     <strong class="block font-medium mb-1">Owner:</strong>

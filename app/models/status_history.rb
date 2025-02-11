@@ -1,0 +1,2 @@
+class StatusHistory < ConversationHistory
+end

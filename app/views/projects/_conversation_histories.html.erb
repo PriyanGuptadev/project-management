@@ -1,0 +1,38 @@
+<div class="bg-white p-4 rounded-lg shadow-md">
+  <h2 class="text-lg font-semibold mb-4">Conversation History</h2>
+
+  <% if project.conversation_histories.any? %>
+    <ul class="space-y-4">
+      <% project.conversation_histories.order(updated_at: :desc).each do |conversation_history| %>
+        <li class="flex items-start space-x-3">
+          <div>
+            <p class="text-gray-600 font-semibold">
+              <%= conversation_history.updated_at.strftime("%b %d, %Y - %I:%M %p") %>
+            </p>
+            <p>
+              <span class="font-semibold"><%= conversation_history.user.email %></span>
+              <% if conversation_history.comment? %>
+                commented:
+                <span class="italic text-gray-700">"<%= conversation_history.comment %>"</span>
+              <% else %>
+                <% if conversation_history.previous_status.present? && conversation_history.current_status.present? %>
+                  changed status from 
+                  <span class="font-semibold"><%= conversation_history.previous_status %></span>
+                  --->
+                  <span class="font-semibold"><%= conversation_history.current_status %></span>
+                <% elsif conversation_history.current_status.present? %>
+                  changed status to 
+                  <span class="font-semibold"><%= conversation_history.current_status %></span>
+                <% else %>
+                  changed status
+                <% end %>
+              <% end %>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-gray-500 italic">No conversation history yet.</p>
+  <% end %>
+</div>

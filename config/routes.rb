@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :projects do
     patch "update_status", on: :member, as: :update_status
 
-    resources :comments, only: [ :create ], defaults: { commentable_type: "Project" }
+    resources :conversation_histories, only: [ :create ], defaults: { commentable_type: "Project" }
   end
 
   devise_for :users

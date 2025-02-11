@@ -1,9 +1,0 @@
-<%= turbo_stream.prepend "project_comments", @comment %>
-
-<%= turbo_stream.update "new_project_comment" do %>
-  <%= render "form", commentable: @commentable %>
-<% end %>
-
-<%= turbo_stream.update "project_activities" do %>
-  <%= render "projects/activities", project: @commentable %>
-<% end %>

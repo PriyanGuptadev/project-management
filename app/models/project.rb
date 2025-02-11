@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   validates :title, presence: true
 
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
-  has_many :comments, as: :commentable, dependent: :destroy
-  has_many :activities, dependent: :destroy, class_name: "ProjectActivity"
+  has_many :conversation_histories, dependent: :destroy, class_name: "ConversationHistory"
+  has_many :comment_histories, dependent: :destroy, class_name: "CommentHistory"
+  has_many :status_histories, dependent: :destroy, class_name: "StatusHistory"
 end

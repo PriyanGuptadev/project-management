@@ -1,0 +1,8 @@
+
+<%= turbo_stream.update "new_project_comment" do %>
+  <%= render "form", project: @project %>
+<% end %>
+
+<%= turbo_stream.update "conversation_history" do %>
+  <%= render 'projects/conversation_histories', project: @project %>
+<% end %>

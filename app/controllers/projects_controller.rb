@@ -36,8 +36,19 @@ class ProjectsController < ApplicationController
   end
 
   def update_status
-    @project.update!(status: params[:project][:status])
-    @project.activities.create!(user: current_user, activity_type: :status_change)
+    previous_status = @project.status
+
+    respond_to do |format|
+      if @project.update(status: params[:project][:status])
+        @project.status_histories.create!(user: current_user, previous_status: previous_status, current_status: params[:project][:status])
+
+        format.html { redirect_to @project, notice: "Project Status was updated successfully." }
+        format.turbo_stream
+      else
+        format.html { redirect_to @project, alert: "Error updating project status." }
+        format.turbo_stream
+      end
+    end
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json

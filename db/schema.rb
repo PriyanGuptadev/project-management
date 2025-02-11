@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_11_080756) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_11_081529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "conversation_histories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.string "type"
+    t.integer "previous_status"
+    t.integer "current_status"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_conversation_histories_on_project_id"
+    t.index ["user_id"], name: "index_conversation_histories_on_user_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title", null: false
@@ -37,5 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_11_080756) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "conversation_histories", "projects"
+  add_foreign_key "conversation_histories", "users"
   add_foreign_key "projects", "users", column: "owner_id"
 end
